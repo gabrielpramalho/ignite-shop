@@ -54,6 +54,6 @@ export const ImageContainer = styled('div', {
     justifyContent: 'center',
 
     img:{
-        objectFit: 'conver'
+        objectFit: 'cover'
     }
 })

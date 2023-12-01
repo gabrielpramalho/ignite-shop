@@ -11,7 +11,7 @@ import Stripe from "stripe";
 
 import { HomeContainer, Product } from "../styles/pages/home";
 
-
+import { useShoppingCart } from 'use-shopping-cart'
 
 interface HomeProps{
   products:{
@@ -24,6 +24,11 @@ interface HomeProps{
 
 
 export default function Home({ products }: HomeProps) {
+
+  const { cartDetails } = useShoppingCart()
+
+  console.log(cartDetails)
+
 
   const [sliderRef] = useKeenSlider({
     slides:{
@@ -51,7 +56,6 @@ export default function Home({ products }: HomeProps) {
                   </footer>
                 </Product>
               </Link>
-
             )
           })
         }

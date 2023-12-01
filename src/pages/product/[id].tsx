@@ -6,6 +6,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import Stripe from "stripe";
+import { useShoppingCart } from 'use-shopping-cart'
 
 
 interface ProductProps{
@@ -13,15 +14,23 @@ interface ProductProps{
         id: string,
         name: string,
         imageUrl: string,
-        price: string;
+        price: number;
         description: string;
         defaultPriceId: string;
+        sku: string,
     }
 }
 
 export default function Product({ product }: ProductProps) {
 
+    const { addItem } = useShoppingCart()
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+
+
+    const productPrice = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(product.price / 100)
 
     async function handleBuyProduct() {
         try{
@@ -41,6 +50,16 @@ export default function Product({ product }: ProductProps) {
         } 
     }
 
+    function handleAddProductCart(){
+
+        const newProduct = {
+            ...product,
+            currency: 'BRL',
+        }
+
+        addItem(newProduct)
+    }
+
     return(
         <>
             <Head>
@@ -53,11 +72,11 @@ export default function Product({ product }: ProductProps) {
 
                 <ProductDetails>
                     <h1>{product.name}</h1>
-                    <span>{product.price}</span>
+                    <span>{productPrice}</span>
 
                     <p>{product.description}</p>
 
-                    <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>
+                    <button onClick={handleAddProductCart} disabled={isCreatingCheckoutSession}>
                         Comprar agora
                     </button>
                 </ProductDetails>
@@ -91,12 +110,10 @@ export const getStaticProps: GetStaticProps<any, {id: string}> = async ({ params
                 id: product.id,
                 name: product.name,
                 imageUrl: product.images[0],
-                price: new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(price.unit_amount! / 100),       
+                price: price.unit_amount,       
                 description: product.description,
                 defaultPriceId: price.id,
+                sku: '',
             }
         },
         revalidate: 60 * 60 * 1, // 1 hour
