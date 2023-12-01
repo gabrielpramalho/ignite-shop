@@ -79,8 +79,41 @@ export const CartContainer = styled('div', {
     position: 'relative',
     flex: 1,
 
+    h4:{
+        fontSize: '$lg',
+        color: '$gray100',
+        lineHeight: 1.6,
+        fontWeight: 'bold',
+    },
+
     footer:{
         marginTop: 'auto',
+
+        button:{
+            width: '100%',
+            padding: '1.25rem 2rem',
+            border: 0,
+            borderRadius: 8,
+            background: '$green500',
+
+            marginTop: '3.5rem',
+
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+
+            fontSize: '$lg',
+            lineHeight: 1.6,
+            fontWeight: 'bold',
+            color: '$white',
+
+            cursor: 'pointer',
+
+            '&:hover' :{
+                background: '$green300',
+            }
+
+        },
     }
 })
 
@@ -90,6 +123,8 @@ export const ProductsCartContainer = styled('div', {
     display: 'flex',
     flexDirection: 'column',
     gap: '1.5rem',
+
+    overflow: 'auto',
 
 
 })
@@ -103,7 +138,37 @@ export const ProductCart = styled('div', {
     'div:last-child':{
         display: 'flex',
         flexDirection: 'column',
-        flex: 1,
+
+        span:{
+            fontSize: '$md',
+            color: '$gray300',
+            lineHeight: 1.6
+        },
+
+        strong:{
+            fontSize: '$md',
+            color: '$gray100',
+            lineHeight: 1.6
+        },
+
+        button:{
+            background: 'none',
+            border: 0,
+            color: '$green500',
+            fontSize: '1rem',
+            lineHeight: 1.6,
+
+            marginTop: '0.5rem',
+            display: 'flex',
+
+            cursor: 'pointer',
+
+            '&:hover' :{
+                color: '$green300',
+            }
+
+        },
+
     }
 })
 export const ImageContainer = styled('div', {
@@ -123,7 +188,27 @@ export const ImageContainer = styled('div', {
     }
 
 })
-export const PriceContainer = styled('div', {})
+export const PriceContainer = styled('div', {
+    div:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        color: '$gray100'
+    },
+
+    span:{
+        lineHeight: 1.6
+    },
+
+    strong:{
+        fontSize: '$lg',
+        lineHeight: 1.6,
+
+        '&:last-child':{
+            fontSize: '$xl',
+        }
+    }
+})
 
 export const ButtonX = styled('button', {
     position: 'absolute',

@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
     >
       <Container>
         <Header>
-          <Link href='/'>
+          <Link href='  /'>
             <Image src={logoImg} alt='' />
           </Link>
           <button type='button' onClick={handleToggleCart}>
@@ -54,23 +54,6 @@ export default function App({ Component, pageProps }: AppProps) {
             </ButtonX>
               <CartContainer>
                 <h4>Sacola de compras</h4>
-
-                <ProductsCartContainer>
-                  <ProductCart>
-                    <ImageContainer>
-                      <Image />
-                    </ImageContainer>
-
-                    <div>
-                      <span>Camiseta X</span>
-
-                      <strong>R$ 79,90</strong>
-
-                      <button>Remover</button>
-                    </div>
-                  </ProductCart>
-                  
-                </ProductsCartContainer>
 
                 <ProductsCartContainer>
                   <ProductCart>
