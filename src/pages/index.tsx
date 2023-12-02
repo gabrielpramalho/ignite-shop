@@ -12,6 +12,7 @@ import Stripe from "stripe";
 import { HomeContainer, Product } from "../styles/pages/home";
 
 import { useShoppingCart } from 'use-shopping-cart'
+import { Handbag } from "@phosphor-icons/react";
 
 interface HomeProps{
   products:{
@@ -26,8 +27,6 @@ interface HomeProps{
 export default function Home({ products }: HomeProps) {
 
   const { cartDetails } = useShoppingCart()
-
-  console.log(cartDetails)
 
 
   const [sliderRef] = useKeenSlider({
@@ -51,8 +50,13 @@ export default function Home({ products }: HomeProps) {
                 <Product  className="keen-slider__slide" >
                   <Image src={product.imageUrl} width={520} height={480} alt=""/>
                   <footer>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                    <div>
+                      <strong>{product.name}</strong>
+                      <span>{product.price}</span>
+                    </div>
+                    <button type='button'>
+                      <Handbag size={24} weight='bold'/>
+                    </button>
                   </footer>
                 </Product>
               </Link>
