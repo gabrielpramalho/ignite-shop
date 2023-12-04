@@ -10,7 +10,7 @@ interface AsideCartProps{
 
 export function AsideCart({handleToggleCart}:AsideCartProps){
 
-  const { cartDetails, removeItem } = useShoppingCart()
+  const { cartDetails, removeItem, cartCount, formattedTotalPrice } = useShoppingCart()
 
   const cartEntries = Object.values(cartDetails ?? {})
 
@@ -53,11 +53,11 @@ export function AsideCart({handleToggleCart}:AsideCartProps){
             <PriceContainer>
               <div>
                 <span>Quantidade</span>
-                <span>3 itens</span>
+                <span>{cartCount} itens</span>
               </div>
               <div>
                 <strong>Valor total</strong>
-                <strong>RS 270,00</strong>
+                <strong>{formattedTotalPrice}</strong>
               </div>
             </PriceContainer>
 

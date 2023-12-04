@@ -1,16 +1,13 @@
 import type { AppProps } from 'next/app'
 import { globalStyles } from '../styles/global'
 
-import logoImg from '../assets/logo.svg'
-import { Container, Header} from '../styles/pages/app';
-import Image from 'next/image';
+import { Container} from '../styles/pages/app';
 import { CartProvider } from 'use-shopping-cart';
 
 import { useState } from 'react'
 
-import { Handbag, X } from '@phosphor-icons/react'
-import Link from 'next/link';
 import { AsideCart } from '../components/Aside';
+import { Header } from '../components/Header';
 
 
 
@@ -39,15 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
       shouldPersist
     >
       <Container>
-        <Header>
-          <Link href='/'>
-            <Image src={logoImg} alt='' />
-          </Link>
-          <button type='button' onClick={handleToggleCart}>
-            <Handbag size={24} weight='bold'/>
-            <span>1</span>
-          </button>
-        </Header>
+        <Header handleToggleCart={handleToggleCart} />
         
         {cartIsOpen &&
           <AsideCart handleToggleCart={handleToggleCart}/>
