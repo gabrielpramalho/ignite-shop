@@ -10,9 +10,11 @@ interface ProductProps{
     name: string,
     imageUrl: string,
     price: number;
+    defaultPriceId: string;
+
 }
 
-export function Product({id, name, imageUrl, price}: ProductProps){
+export function Product({id, name, imageUrl, price, defaultPriceId}: ProductProps){
 
     const { addItem } = useShoppingCart()
 
@@ -31,6 +33,7 @@ export function Product({id, name, imageUrl, price}: ProductProps){
             imageUrl,
             price,
             sku: '',
+            defaultPriceId,
             currency: 'BRL',
         }
 

@@ -2,7 +2,10 @@ import Image from "next/image";
 import { Aside, ButtonX, CartContainer, ImageContainer, PriceContainer, ProductCart, ProductsCartContainer } from "./style";
 import { X } from "@phosphor-icons/react";
 
+import { useState } from 'react'
+
 import { useShoppingCart } from 'use-shopping-cart'
+import axios from "axios";
 
 interface AsideCartProps{
     handleToggleCart: () => void;
@@ -10,13 +13,33 @@ interface AsideCartProps{
 
 export function AsideCart({handleToggleCart}:AsideCartProps){
 
+  const [isCreatingCheckoutSession ,setIsCreatingCheckoutSession] = useState(false)
+  
   const { cartDetails, removeItem, cartCount, formattedTotalPrice } = useShoppingCart()
 
   const cartEntries = Object.values(cartDetails ?? {})
 
+  const pricesIds = cartEntries.map(product => {
+    return {price: product.defaultPriceId, quantity: product.quantity}
+  })
 
-  console.log(cartEntries)
+  async function handleBuyProduct() {
+    try{
+        setIsCreatingCheckoutSession(true);
 
+        const response = await axios.post('/api/checkout',{
+          pricesIds
+        })
+
+        const { checkoutUrl } = response.data;
+
+        window.location.href = checkoutUrl
+    } catch(err){
+        setIsCreatingCheckoutSession(false)
+
+        alert('Falha ao redirecionar ao checkout!')
+    } 
+}
   return(
       <Aside>
         <ButtonX onClick={handleToggleCart}>
@@ -61,7 +84,7 @@ export function AsideCart({handleToggleCart}:AsideCartProps){
               </div>
             </PriceContainer>
 
-            <button>
+            <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>
               Finalizar Compra
             </button>
           </footer>
